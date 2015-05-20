@@ -4,6 +4,7 @@ if [[ -a /setup ]]; then
   exit 0
 fi
 /bin/sed -i "s/^myhostname = .*/myhostname = `hostname`/" /etc/postfix/main.cf
+/bin/sed -i -e "s#^mynetworks = .*#mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 `ip route show|cut -d ' ' -f 1|tail -n 1`#" /etc/postfix/main.cf
 echo $HOSTNAME > /etc/mailname
 cat > /etc/supervisor/conf.d/supervisor.conf <<EOF
 [supervisord]
