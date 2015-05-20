@@ -3,7 +3,7 @@ if [[ -a /setup ]]; then
   /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisor.conf 
   exit 0
 fi
-/bin/sed -i "s/^myhostname = .*/myhostname = `hostname`/" main.cf
+/bin/sed -i "s/^myhostname = .*/myhostname = `hostname`/" /etc/postfix/main.cf
 echo $HOSTNAME > /etc/mailname
 cat > /etc/supervisor/conf.d/supervisor.conf <<EOF
 [supervisord]
